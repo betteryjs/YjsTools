@@ -1,6 +1,8 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.20)
 project(YjsTools)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(YjsTools main.cpp)
+
+
+add_subdirectory(Decode_Encode bin)
