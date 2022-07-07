@@ -3,12 +3,9 @@
 echo "init PUSH"
 
 git add .
-#
 git commit -m $1
-#
-# git push github master
-#
-# git push tencent master
+git push github master
+git push tencent master
 
 
 
