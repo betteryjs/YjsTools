@@ -1,0 +1,1 @@
+add_executable(test_base64 test_base64.cpp ../base64.cpp)

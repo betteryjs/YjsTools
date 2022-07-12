@@ -1,8 +1,10 @@
 #include "urlencode_urldecode.h"
  
 
-unsigned char ToHex(unsigned char x) 
-{ 
+unsigned char ToHex(unsigned char x)
+{
+    // x + 55  10 进制到大写 HEX 字母 A B C D E F
+    // x + 48  10 进制到数字 0 1 2 3 4 5 6 7 8 9
     return  x > 9 ? x + 55 : x + 48; 
 }
  
