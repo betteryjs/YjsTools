@@ -234,3 +234,6 @@ cmake-build-debug
 build
 GitPush.sh
 .gitmodules
+
+
+cpp-base64
