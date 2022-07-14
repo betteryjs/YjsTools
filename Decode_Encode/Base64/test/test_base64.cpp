@@ -12,7 +12,7 @@ using namespace std;
 
 int main(){
     string inputs{"你好"};
-    string res=base64_encode(inputs.c_str(),inputs.size());
+    string res=base64_encode(inputs);
     cout << res<<endl;
     return 0;
 }

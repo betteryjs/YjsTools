@@ -233,3 +233,4 @@ cmake-build-debug
 
 build
 GitPush.sh
+.gitmodules
