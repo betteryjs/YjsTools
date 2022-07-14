@@ -10,7 +10,7 @@
 
 
 
-
+// 判断一个字符是否在Base64表中
 static inline bool is_base64(const char c)
 {
     return (isalnum(c) || (c == '+') || (c == '/'));
@@ -32,9 +32,15 @@ std::string base64_encode(const std::string & inputs)
         char_array_3[i++] = *(bytes_to_encode++);
         if(i == 3)
         {
+            // 0xfc "11111100" >> 2 取开头第1B的6个比特
             char_array_4[0] = (char_array_3[0] & 0xfc) >> 2;
+            // 0x03 "00000011" << 4 "110000"  取开头第1B的后2个比特当作 char_array_4 [1] 的高2位
+            // 0xf0 "11110000" >> 4 取开头第2B的前4个比特
             char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
+            // 0x0f "00001111" >> 4 取开头第2B的后4个比特
+            // 0xc0 "11000000"
             char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
+            // 0x3f "00111111"
             char_array_4[3] = char_array_3[2] & 0x3f;
             for(i = 0; (i <4) ; i++)
             {
@@ -45,6 +51,8 @@ std::string base64_encode(const std::string & inputs)
     }
     if(i)
     {
+        // 待编码内容的字节数不是 3 的整数倍，那需要进行一些额外的处理
+        // len mod 3 = i
         for(j = i; j < 3; j++)
         {
             char_array_3[j] = '\0';
@@ -54,7 +62,8 @@ std::string base64_encode(const std::string & inputs)
         char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
         char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
         char_array_4[3] = char_array_3[2] & 0x3f;
-
+        // i = 2  翻译前三个 后一个补 " = "
+        // i = 1  翻译前两个 后两个补 " = "
         for(j = 0; (j < i + 1); j++)
         {
             ret += base64_chars[char_array_4[j]];

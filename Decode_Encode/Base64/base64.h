@@ -6,11 +6,13 @@
 #define YJSTOOLS_BASE64_H
 #include <iostream>
 
-
+// base64 索引表
 static const std::string base64_chars =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         "abcdefghijklmnopqrstuvwxyz"
         "0123456789+/";
+
+
 
 static inline bool is_base64(const char c);
 std::string base64_encode(const std::string & decoded_string);
