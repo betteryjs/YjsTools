@@ -10,11 +10,11 @@
 
 using namespace std;
 
-
 static const std::string base64_chars =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         "abcdefghijklmnopqrstuvwxyz"
         "0123456789+/";
+
 
 
 static inline bool is_base64(const char c){
@@ -36,7 +36,6 @@ std::string base64_encode(const std::string & inputs){
     unsigned int pos = 0;
 
     while (pos < in_len) {
-        // 0xfc "11111100" >> 2 取开头第1B的6个比特
         ret.push_back(base64_chars[(bytes_to_encode[pos + 0] & 0xfc) >> 2]);
 
         if (pos+1 < in_len) {
