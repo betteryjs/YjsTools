@@ -1,15 +1,26 @@
-#include "urlencode_urldecode.h"
- 
+//
+// Created by yjs on 2022/7/17.
+//
+
+#ifndef YJSTOOLS_URLENCODEDECODE_HPP
+#define YJSTOOLS_URLENCODEDECODE_HPP
+
+
+#include <iostream>
+#include <assert.h>
+
+using namespace std;
+
 
 unsigned char ToHex(unsigned char x)
 {
     // x + 55  10 进制到大写 HEX 字母 A B C D E F
     // x + 48  10 进制到数字 0 1 2 3 4 5 6 7 8 9
-    return  x > 9 ? x + 55 : x + 48; 
+    return  x > 9 ? x + 55 : x + 48;
 }
- 
-unsigned char FromHex(unsigned char x) 
-{ 
+
+unsigned char FromHex(unsigned char x)
+{
     unsigned char y;
     if (x >= 'A' && x <= 'Z') y = x - 'A' + 10;
     else if (x >= 'a' && x <= 'z') y = x - 'a' + 10;
@@ -17,17 +28,17 @@ unsigned char FromHex(unsigned char x)
     else assert(0);
     return y;
 }
- 
+
 std::string UrlEncode(const std::string& str)
 {
     std::string strTemp = "";
     size_t length = str.length();
     for (size_t i = 0; i < length; i++)
     {
-        if (isalnum((unsigned char)str[i]) || 
+        if (isalnum((unsigned char)str[i]) ||
             (str[i] == '-') ||
-            (str[i] == '_') || 
-            (str[i] == '.') || 
+            (str[i] == '_') ||
+            (str[i] == '.') ||
             (str[i] == '~'))
             strTemp += str[i];
         else if (str[i] == ' ')
@@ -41,7 +52,7 @@ std::string UrlEncode(const std::string& str)
     }
     return strTemp;
 }
- 
+
 std::string UrlDecode(const std::string& str)
 {
     std::string strTemp = "";
@@ -60,8 +71,16 @@ std::string UrlDecode(const std::string& str)
     }
     return strTemp;
 }
- 
- 
- 
- 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+#endif //YJSTOOLS_URLENCODEDECODE_HPP
